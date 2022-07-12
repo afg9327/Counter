@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import java.lang.Math.abs
 import java.util.*
-import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,10 +14,15 @@ class MainActivity : AppCompatActivity() {
 
         var timerTask : Timer? = null
         var isRunning = false
-        val tv: TextView = findViewById(R.id.tvHello)
+        val tv: TextView = findViewById(R.id.counter)
         var sec: Int = 0
-
+        val tg: TextView = findViewById(R.id.target)
         val btn: Button = findViewById(R.id.tvbutton)
+        val sc: TextView = findViewById(R.id.score)
+        val random_box = Random()
+        val num = random_box.nextInt(1000)
+        tg.text = (num.toFloat()/100).toString()
+        tv.text = ""
 
         btn.setOnClickListener {
             isRunning = !isRunning
@@ -32,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 btn.text = "시작"
                 timerTask?.cancel()
-
+                sc.text= (abs(sec-num).toFloat()/100).toString()
             }
 
         }
