@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import java.lang.Math.abs
 import java.lang.System.exit
 import java.util.*
@@ -18,6 +21,13 @@ class MainActivity : AppCompatActivity() {
 
     fun start(){
         setContentView(R.layout.activity_start)
+
+        MobileAds.initialize(this) {}
+
+        val adview: AdView = findViewById(R.id.adView) //광고 추가
+        val adRequest = AdRequest.Builder().build()
+        adview.loadAd(adRequest)
+
         val acbtn: Button = findViewById(R.id.accept)
         val psbtn: Button = findViewById(R.id.plus)
         val msbtn: Button = findViewById(R.id.minus)
@@ -60,6 +70,12 @@ class MainActivity : AppCompatActivity() {
     }
     fun main(){
         setContentView(R.layout.activity_main)
+
+        MobileAds.initialize(this) {}
+        val adview2: AdView= findViewById(R.id.adView2)
+        val adRequest = AdRequest.Builder().build()
+        adview2.loadAd(adRequest)
+
         var timerTask : Timer? = null
         var stage = 1
         var sec: Int = 0
@@ -132,6 +148,12 @@ class MainActivity : AppCompatActivity() {
     }
     fun end(){
         setContentView(R.layout.activity_end)
+
+        MobileAds.initialize(this) {}
+        val adview3: AdView = findViewById(R.id.adView3)
+        val adRequest = AdRequest.Builder().build()
+        adview3.loadAd(adRequest)
+
         val lp: TextView = findViewById(R.id.l_people)
         val lsc: TextView = findViewById(R.id.l_score)
         val rsbtn: Button = findViewById(R.id.rs_button)
