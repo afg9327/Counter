@@ -3,7 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#EAD3E3">
+
+    <Button
+        android:id="@+id/btn_blind"
+        android:layout_width="257dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#EFB9B9"
+        android:text="Blind"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.777" />
 
     <TextView
         android:id="@+id/pn"
@@ -36,6 +50,7 @@
         android:layout_height="78dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="28dp"
+        android:backgroundTint="#A4DD61"
         android:text="-"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,6 +65,7 @@
         android:layout_width="72dp"
         android:layout_height="79dp"
         android:layout_marginEnd="60dp"
+        android:backgroundTint="#A4DD61"
         android:text="+"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +79,7 @@
         android:id="@+id/accept"
         android:layout_width="89dp"
         android:layout_height="61dp"
+        android:backgroundTint="#0CDADA"
         android:text="확인"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -70,6 +87,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pn"
-        app:layout_constraintVertical_bias="0.254" />
+        app:layout_constraintVertical_bias="0.693" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

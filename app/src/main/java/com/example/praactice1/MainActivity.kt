@@ -1,9 +1,11 @@
 package com.example.praactice1
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import java.lang.Math.abs
 import java.lang.System.exit
 import java.util.*
@@ -12,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     var k = 1
     var p_num = 0
     val score = mutableListOf<Float>()
+    var isBlind = true
 
     fun start(){
         setContentView(R.layout.activity_start)
@@ -20,6 +23,21 @@ class MainActivity : AppCompatActivity() {
         val msbtn: Button = findViewById(R.id.minus)
         val ps: TextView = findViewById(R.id.people2)
         val pn: TextView = findViewById(R.id.pn)
+        val btn_blind: Button = findViewById(R.id.btn_blind)
+
+        pn.text= p_num.toString()
+
+        btn_blind.setOnClickListener {
+            isBlind =!isBlind
+            if(isBlind==true)
+            {
+                btn_blind.text = "Blind 모드 On"
+            }
+            else if(isBlind==false)
+            {
+                btn_blind.text = "Blind 모드 Off"
+            }
+        }
         psbtn.setOnClickListener{
             p_num++
             pn.text = p_num.toString()
@@ -50,12 +68,29 @@ class MainActivity : AppCompatActivity() {
         val btn: Button = findViewById(R.id.tvbutton)
         val sc: TextView = findViewById(R.id.score)
         val pp: TextView = findViewById(R.id.people)
+        val btn_back: Button = findViewById(R.id.btn_back)
         val random_box = Random()
         val num = random_box.nextInt(1000)
+        val bg_main : ConstraintLayout = findViewById(R.id.bg_main)
+        val color_list = mutableListOf<String>("#FBEEEE","#D8E6CB","#D3EAE1","#D3E1EA","#D4D3EA","#DDD3EA","#E5D3EA","#EAD3E3")
+        var color_index = k%8-1
+        if(color_index == -1)
+        {
+            color_index= 7
+        }
+        val color_select =color_list.get(color_index)
+        bg_main.setBackgroundColor(Color.parseColor(color_select))
 
         tg.text = (num.toFloat()/100).toString()
         tv.text = ""
         pp.text = "${k}번 참가자"
+
+        btn_back.setOnClickListener {
+            k=1
+            score.clear()
+            p_num = 3
+            start()
+        }
 
         btn.setOnClickListener {
             stage++
@@ -64,12 +99,19 @@ class MainActivity : AppCompatActivity() {
                 timerTask = kotlin.concurrent.timer(period = 10) {
                     sec++
                     runOnUiThread {
-                        tv.text = (sec.toFloat()/100).toString()
+                        if(isBlind==false){
+                            tv.text = (sec.toFloat()/100).toString()
+                        }
+                        else if(isBlind==true && stage ==2)
+                        {
+                            tv.text = "???"
+                        }
                     }
                 }
             }
             else if (stage==3) {
                 btn.text = "다음"
+                tv.text = (sec.toFloat()/100).toString()
                 timerTask?.cancel()
                 val point = abs(sec-num).toFloat()/100
                 score.add(point)
